@@ -1,0 +1,25 @@
+<Window x:Class="BatteryShop.Views.PaymentDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Payment" Width="380" SizeToContent="Height" ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner" FontSize="13" FontFamily="Segoe UI">
+    <StackPanel Margin="18">
+        <TextBlock x:Name="PartyText" FontSize="16" FontWeight="SemiBold"/>
+        <TextBlock x:Name="BalanceText" Foreground="{StaticResource MutedBrush}" Margin="0,2,0,8"/>
+
+        <TextBlock Text="Amount (Rs) *" Style="{StaticResource Label}"/>
+        <TextBox x:Name="AmountBox" Style="{StaticResource AmountBox}" FontSize="16"/>
+        <TextBlock Text="Method" Style="{StaticResource Label}"/>
+        <ComboBox x:Name="MethodBox"/>
+        <TextBlock Text="Date" Style="{StaticResource Label}"/>
+        <DatePicker x:Name="DateBox"/>
+        <TextBlock Text="Notes" Style="{StaticResource Label}"/>
+        <TextBox x:Name="NotesBox"/>
+        <CheckBox x:Name="PrintBox" Content="Print payment receipt" IsChecked="True" Margin="0,10,0,0"/>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,16,0,0">
+            <Button Content="Save" Style="{StaticResource PrimaryButton}" IsDefault="True" MinWidth="90" Click="Save_Click"/>
+            <Button Content="Cancel" IsCancel="True" MinWidth="90" Margin="0"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

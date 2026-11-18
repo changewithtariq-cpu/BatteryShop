@@ -1,0 +1,110 @@
+<UserControl x:Class="BatteryShop.Views.ModelsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DockPanel>
+        <TextBlock DockPanel.Dock="Top" Text="Brands &amp; Battery Models" Style="{StaticResource PageTitle}"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="230"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="300"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Brands -->
+            <Border Style="{StaticResource Card}" Margin="0,0,12,0">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top" Text="Brands" Style="{StaticResource SectionTitle}"/>
+                    <StackPanel DockPanel.Dock="Bottom" Margin="0,10,0,0">
+                        <TextBox x:Name="BrandName"/>
+                        <CheckBox x:Name="BrandActive" Content="Active" IsChecked="True"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Button Content="Save" Style="{StaticResource PrimaryButton}" Click="SaveBrand_Click"/>
+                            <Button Content="New" Click="NewBrand_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <ListBox x:Name="BrandList" DisplayMemberPath="Name" SelectionChanged="BrandList_SelectionChanged"/>
+                </DockPanel>
+            </Border>
+
+            <!-- Models -->
+            <Border Grid.Column="1" Style="{StaticResource Card}" Margin="0,0,12,0">
+                <DockPanel>
+                    <DockPanel DockPanel.Dock="Top" Margin="0,0,0,8">
+                        <CheckBox x:Name="ShowInactive" DockPanel.Dock="Right" Content="Show inactive" Checked="Reload" Unchecked="Reload"/>
+                        <TextBlock Text="Battery models" Style="{StaticResource SectionTitle}"/>
+                    </DockPanel>
+                    <DataGrid x:Name="ModelGrid" IsReadOnly="True" SelectionChanged="ModelGrid_SelectionChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Brand" Binding="{Binding BrandName}" Width="110"/>
+                            <DataGridTextColumn Header="Model" Binding="{Binding ModelName}" Width="*"/>
+                            <DataGridTextColumn Header="Ah" Binding="{Binding CapacityAh}" Width="50"/>
+                            <DataGridTextColumn Header="Type" Binding="{Binding BatteryType}" Width="85"/>
+                            <DataGridTextColumn Header="Sale price" Binding="{Binding DefaultSalePrice, StringFormat=N0}" Width="90" ElementStyle="{StaticResource RightCell}"/>
+                            <DataGridTextColumn Header="Warranty" Binding="{Binding WarrantyMonths, StringFormat='{}{0} mo'}" Width="70"/>
+                            <DataGridCheckBoxColumn Header="Active" Binding="{Binding IsActive}" Width="55"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+            </Border>
+
+            <!-- Model form -->
+            <Border Grid.Column="2" Style="{StaticResource Card}">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <TextBlock x:Name="FormTitle" Text="New model" Style="{StaticResource SectionTitle}"/>
+                        <TextBlock Text="Brand *" Style="{StaticResource Label}"/>
+                        <ComboBox x:Name="FBrand" DisplayMemberPath="Name"/>
+                        <TextBlock Text="Model name *  (e.g. NS70, 200G)" Style="{StaticResource Label}"/>
+                        <TextBox x:Name="FModel"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/><ColumnDefinition Width="10"/><ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock Text="Capacity (Ah) *" Style="{StaticResource Label}"/>
+                                <TextBox x:Name="FAh" Style="{StaticResource IntBox}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="Voltage" Style="{StaticResource Label}"/>
+                                <TextBox x:Name="FVolt" Style="{StaticResource IntBox}" Text="12"/>
+                            </StackPanel>
+                        </Grid>
+                        <TextBlock Text="Type" Style="{StaticResource Label}"/>
+                        <ComboBox x:Name="FType"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/><ColumnDefinition Width="10"/><ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock Text="Sale price (Rs)" Style="{StaticResource Label}"/>
+                                <TextBox x:Name="FPrice" Style="{StaticResource AmountBox}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="Warranty (months)" Style="{StaticResource Label}"/>
+                                <TextBox x:Name="FWarranty" Style="{StaticResource IntBox}" Text="0"/>
+                            </StackPanel>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/><ColumnDefinition Width="10"/><ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock Text="Approx. weight (KG)" Style="{StaticResource Label}"/>
+                                <TextBox x:Name="FWeight" Style="{StaticResource DecimalBox}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="Low stock alert at" Style="{StaticResource Label}"/>
+                                <TextBox x:Name="FLow" Style="{StaticResource IntBox}" Text="2"/>
+                            </StackPanel>
+                        </Grid>
+                        <CheckBox x:Name="FActive" Content="Active" IsChecked="True" Margin="0,10"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Button Content="Save model" Style="{StaticResource PrimaryButton}" Click="SaveModel_Click"/>
+                            <Button Content="New" Click="NewModel_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+        </Grid>
+    </DockPanel>
+</UserControl>

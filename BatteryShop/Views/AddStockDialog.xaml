@@ -1,0 +1,56 @@
+<Window x:Class="BatteryShop.Views.AddStockDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Add stock" Width="460" SizeToContent="Height" ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner" FontSize="13" FontFamily="Segoe UI">
+    <StackPanel Margin="18">
+        <TextBlock Text="Add stock without a purchase bill" Style="{StaticResource SectionTitle}"/>
+        <TextBlock TextWrapping="Wrap" Foreground="{StaticResource MutedBrush}"
+                   Text="Use this for batteries already in the shop when you start using the software, or a second-hand battery you bought. For new batteries from a dealer, use Purchases instead."/>
+
+        <TextBlock Text="Battery model *" Style="{StaticResource Label}"/>
+        <ComboBox x:Name="ModelBox" IsEditable="True" IsTextSearchEnabled="True"/>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/><ColumnDefinition Width="10"/><ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel>
+                <TextBlock Text="Condition" Style="{StaticResource Label}"/>
+                <ComboBox x:Name="ConditionBox" SelectionChanged="Condition_Changed"/>
+            </StackPanel>
+            <StackPanel Grid.Column="2">
+                <TextBlock Text="Type of entry" Style="{StaticResource Label}"/>
+                <ComboBox x:Name="SourceBox"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/><ColumnDefinition Width="10"/><ColumnDefinition/><ColumnDefinition Width="10"/><ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel>
+                <TextBlock Text="Quantity *" Style="{StaticResource Label}"/>
+                <TextBox x:Name="QtyBox" Style="{StaticResource IntBox}" Text="1"/>
+            </StackPanel>
+            <StackPanel Grid.Column="2">
+                <TextBlock Text="Cost per battery *" Style="{StaticResource Label}"/>
+                <TextBox x:Name="CostBox" Style="{StaticResource AmountBox}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="4">
+                <TextBlock x:Name="PriceLabel" Text="Sale price (optional)" Style="{StaticResource Label}"/>
+                <TextBox x:Name="PriceBox" Style="{StaticResource AmountBox}"/>
+            </StackPanel>
+        </Grid>
+
+        <TextBlock Text="Serial numbers (one per line, optional)" Style="{StaticResource Label}"/>
+        <TextBox x:Name="SerialsBox" AcceptsReturn="True" Height="80" VerticalContentAlignment="Top" VerticalScrollBarVisibility="Auto"/>
+        <TextBlock Text="Condition note (e.g. '80% backup, tested')" Style="{StaticResource Label}"/>
+        <TextBox x:Name="NoteBox"/>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,16,0,0">
+            <Button Content="Add to stock" Style="{StaticResource PrimaryButton}" IsDefault="True" Click="Save_Click"/>
+            <Button Content="Cancel" IsCancel="True" Margin="0"/>
+        </StackPanel>
+    </StackPanel>
+</Window>
